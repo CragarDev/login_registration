@@ -1,3 +1,4 @@
+from crypt import methods
 from flask_app.models.users_model import User
 from flask_app import app
 from flask import render_template, redirect, request, session, flash
@@ -43,6 +44,35 @@ def register_user():
     session["user_id"] = user_id
     #   redirect...
     return redirect("/dashboard")
+
+
+# t- ===========================================
+# ? PROCESS FORM - / Login
+# t- ===========================================
+@app.route("/login_user", methods=["POST"])
+def login_user():
+
+    # validate info
+    if not User.validate_login(request.form):
+        return redirect("/")
+
+    # query based on form data
+    query_data = {
+        "email": request.form["email"]
+    }
+
+    logged_in_user = User.get_by_email(query_data)
+
+    # put user_id into session
+    session["user_id"] = logged_in_user.id
+
+    # redirect
+    return redirect("/dashboard")
+
+
+# * ===========================================
+# ? RENDER / Dashboard
+# * ===========================================
 
 
 # * ===========================================
