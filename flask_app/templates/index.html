@@ -10,15 +10,73 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 
 <body class="bg-dark text-warning">
-  <!-- start -- MAIN -->
-  <main class="container d-flex flex-wrap mt-4 justify-content-center">
-    <div class="container bg-light text-primary rounded-3 ">
+  <!-- start -- Heading -->
+  <main class="container mt-4">
+    <div class="container bg-light text-dark rounded-3 ">
+      <h1 class="mt-1">LOGIN and REGISTRATION</h1>
+    </div>
+    <p class="w-100"></p>
+    <!-- end -- Heading -->
+    <!-- Validation flash messages -->
+    {% with messages = get_flashed_messages() %}
+    <!-- declare a variable called messages -->
+    {% if messages %}
+    <!-- check if there are any messages -->
+    {% for message in messages %}
+    <!-- loop through the messages -->
+    <h3 class="text-center text-danger">{{message}}</h3> <!-- display each message in a paragraph tag -->
+    <p class="w-100"></p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
 
-      <h1 class="mt-1">Page Title</h1>
+
+    <!-- start -- Registration -->
+    <div class="container">
+
+
+      <div class="container bg-secondary text-light rounded-3 w-50">
+
+        <h2 class="mt-2 ps-3 w-50  rounded-3 text-dark bg-warning">REGISTRATION</h2>
+
+        <form action="/register_user" method="post">
+
+          <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" name="first_name" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" name="last_name" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="text" name="password" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="password_confirmation" class="form-label">Password Confirmation</label>
+            <input type="text" name="password_confirmation" class="form-control">
+          </div>
+
+          <button type="submit" class="btn btn-warning mt-5 mb-5">Register</button>
+
+        </form>
+      </div>
+      <p class="w-100"></p>
+
+
 
     </div>
 
-    <p class="w-100"></p>
+
 
   </main>
   <!-- end -- MAIN -->
