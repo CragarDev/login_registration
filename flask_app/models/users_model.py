@@ -87,6 +87,12 @@ class User:
             return False
         return cls(result[0])
 
+    @classmethod
+    def get_one_user(cls, data):
+        query = "SELECT * FROM users WHERE id = %(user_id)s;"
+        results = connectToMySQL(cls.db).query_db(query, data)
+        return cls(results[0])
+
     # @classmethod
     # def get_all_users(cls):
     #     query = "SELECT * FROM users;"
@@ -98,11 +104,7 @@ class User:
     #     for user in results:
     #         users.append(cls(user))
     #     return users
-    # @classmethod
-    # def get_one_user(cls, data):
-    #     query = "SELECT * FROM users WHERE id = %(user_id)s;"
-    #     results = connectToMySQL(cls.db).query_db(query, data)
-    #     return cls(results[0])
+
     # @classmethod
     # def update_user(cls, data):
     #     query = "UPDATE users SET first_name = %(first_name)s , last_name = %(last_name)s , email = %(email)s ,updated_at = NOW() WHERE id = %(id)s;"

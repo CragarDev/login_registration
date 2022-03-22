@@ -73,7 +73,28 @@ def login_user():
 # * ===========================================
 # ? RENDER / Dashboard
 # * ===========================================
+@app.route("/dashboard")
+def dashboard():
+    if "user_id" not in session:
+        flash("Please Login or Register before entering this site!")
+        return redirect("/")
 
+    query_data = {
+        "user_id": session["user_id"]
+    }
+
+    logged_in_user = User.get_one_user(query_data)
+
+    return render_template("dashboard.html", logged_in_user=logged_in_user)
+
+
+# t- ===========================================
+# ? PROCESS FORM - / logout
+# t- ===========================================
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/")
 
 # * ===========================================
 # ? RENDER / Create
